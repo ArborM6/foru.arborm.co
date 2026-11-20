@@ -5,11 +5,10 @@ import { Header } from "@/components/site/header"
 import { Hero } from "@/components/site/hero"
 import {
   CompanionshipSection,
-  DetailsSection,
+  SubscribeSection,
   WorldSection,
 } from "@/components/site/sections"
 import { EntriesSection } from "@/components/site/entries"
-import { ClosingSection } from "@/components/site/closing"
 import { Footer } from "@/components/site/footer"
 
 export default function Home() {
@@ -20,10 +19,9 @@ export default function Home() {
         <main>
           <Hero />
           <WorldSection />
-          <CompanionshipSection />
           <EntriesSection />
-          <DetailsSection />
-          <ClosingSection />
+          <CompanionshipSection />
+          <SubscribeSection />
         </main>
         <Footer />
       </div>

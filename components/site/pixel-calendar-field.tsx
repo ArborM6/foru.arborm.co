@@ -210,6 +210,33 @@ export function PixelCalendarField() {
             ) : null
           )}
         </svg>
+        <svg
+          width={WIDTH}
+          height={HEIGHT}
+          viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+          fill="none"
+          className="absolute top-0 left-1/2 -translate-x-1/2"
+        >
+          {/* Two squares that slowly wander and pulse — cheap CSS only */}
+          <rect
+            className="pixel-wanderer pixel-wanderer-a"
+            x={11 * STEP}
+            y={9 * STEP}
+            width={CELL}
+            height={CELL}
+            rx={RADIUS}
+            fill="rgba(251, 182, 202, 0.92)"
+          />
+          <rect
+            className="pixel-wanderer pixel-wanderer-b"
+            x={57 * STEP}
+            y={14 * STEP}
+            width={CELL}
+            height={CELL}
+            rx={RADIUS}
+            fill="rgba(247, 140, 166, 0.88)"
+          />
+        </svg>
       </div>
     </div>
   )

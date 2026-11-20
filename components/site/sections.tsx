@@ -5,11 +5,9 @@ import {
   BellRing,
   Crown,
   HeartHandshake,
-  Languages,
   MessageCircleHeart,
   Sparkles,
   Sprout,
-  SunMoon,
   type LucideIcon,
 } from "lucide-react"
 import type { ReactNode } from "react"
@@ -32,8 +30,10 @@ function SectionHeading({
 }: {
   eyebrow: string
   title: string
-  lead?: string
+  lead?: string | string[]
 }) {
+  const leads = !lead ? [] : Array.isArray(lead) ? lead : [lead]
+
   return (
     <motion.div
       variants={fadeInUp}
@@ -53,11 +53,14 @@ function SectionHeading({
       >
         {title}
       </h2>
-      {lead ? (
-        <p className="mt-5 text-base md:text-lg leading-relaxed text-foreground-muted">
-          {lead}
+      {leads.map((para, i) => (
+        <p
+          key={i}
+          className={`${i === 0 ? "mt-5" : "mt-4"} text-base md:text-lg leading-relaxed text-foreground-muted`}
+        >
+          {para}
         </p>
-      ) : null}
+      ))}
     </motion.div>
   )
 }
@@ -159,46 +162,16 @@ export function CompanionshipSection() {
   )
 }
 
-export function DetailsSection() {
+export function SubscribeSection() {
   const { t } = useLanguage()
-  const icons: LucideIcon[] = [SunMoon, Languages]
 
   return (
-    <section id="details" className="relative py-24 md:py-32">
+    <section id="subscribe" className="relative py-24 md:py-32">
       <div className="max-w-6xl mx-auto px-6">
         <SectionHeading
-          eyebrow={t.details.eyebrow}
-          title={t.details.title}
+          eyebrow={t.subscribe.eyebrow}
+          title={t.subscribe.title}
         />
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          className="mt-14 grid gap-6 md:grid-cols-2"
-        >
-          {t.details.items.map((item, i) => {
-            const Icon = icons[i]
-            return (
-              <motion.div
-                key={item.title}
-                variants={fadeInUp}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className="flex items-start gap-5 rounded-2xl border border-border bg-card p-8"
-              >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[rgba(247,140,166,0.12)] text-rose">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-foreground-muted">
-                    {item.description}
-                  </p>
-                </div>
-              </motion.div>
-            )
-          })}
-        </motion.div>
       </div>
     </section>
   )

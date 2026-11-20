@@ -10,9 +10,9 @@ export const i18n = {
   zh: {
     nav: [
       { label: "理念", href: "#world" },
-      { label: "陪伴", href: "#companionship" },
       { label: "入口", href: "#entries" },
-      { label: "细节", href: "#details" },
+      { label: "陪伴", href: "#companionship" },
+      { label: "订阅", href: "#subscribe" },
     ],
     brandName: "为你",
     hero: {
@@ -27,7 +27,10 @@ export const i18n = {
     world: {
       eyebrow: "",
       title: "一个始终为你存在的世界",
-      lead: "在这里，你无需担心发出的帖子没有回复和点赞。无论是难以启齿的心结还是天马行空的想法，又或者单纯无聊的碎碎念，都可以在这里得到回应，却不会被任何人类看到。",
+      lead: [
+        "在这里，你无需担心发出的帖子没有回复和点赞。",
+        "无论是难以启齿的心结还是天马行空的想法，又或者单纯无聊的碎碎念，都可以在这里得到回应，却不会被任何人类看到。",
+      ],
       cards: [
         {
           title: "唯一的主角",
@@ -44,7 +47,7 @@ export const i18n = {
       ],
     },
     companionship: {
-      eyebrow: "陪伴",
+      eyebrow: "",
       title: "像朋友一样，自然而然",
       items: [
         {
@@ -66,7 +69,7 @@ export const i18n = {
       ],
     },
     entries: {
-      eyebrow: "三大入口",
+      eyebrow: "",
       title: "聊天、浏览、历史",
       lead: "三个入口，构成你在这个世界里的日常。",
       disclaimer: "界面为设计示意，并非实际产品截图。",
@@ -88,19 +91,9 @@ export const i18n = {
         },
       ],
     },
-    details: {
-      eyebrow: "细节",
-      title: "合手的，才是贴心的",
-      items: [
-        {
-          title: "浅色 · 深色 · 跟随系统",
-          description: "三种外观模式，随环境与心情自然切换。",
-        },
-        {
-          title: "三语支持",
-          description: "简体中文、繁体中文、English，用你最舒服的语言相处。",
-        },
-      ],
+    subscribe: {
+      eyebrow: "",
+      title: "订阅",
     },
     closing: {
       title: "正在精心打磨中",
@@ -150,9 +143,9 @@ export const i18n = {
   hant: {
     nav: [
       { label: "理念", href: "#world" },
-      { label: "陪伴", href: "#companionship" },
       { label: "入口", href: "#entries" },
-      { label: "細節", href: "#details" },
+      { label: "陪伴", href: "#companionship" },
+      { label: "訂閱", href: "#subscribe" },
     ],
     brandName: "為你",
     hero: {
@@ -167,7 +160,10 @@ export const i18n = {
     world: {
       eyebrow: "",
       title: "一個始終為你存在的世界",
-      lead: "在這裡，你無需擔心發出的帖子沒有回覆和點讚。無論是難以啟齒的心結還是天馬行空的想法，又或者單純無聊的碎碎念，都可以在這裡得到回應，卻不會被任何人類看到。",
+      lead: [
+        "在這裡，你無需擔心發出的帖子沒有回覆和點讚。",
+        "無論是難以啟齒的心結還是天馬行空的想法，又或者單純無聊的碎碎念，都可以在這裡得到回應，卻不會被任何人類看到。",
+      ],
       cards: [
         {
           title: "唯一的主角",
@@ -184,7 +180,7 @@ export const i18n = {
       ],
     },
     companionship: {
-      eyebrow: "陪伴",
+      eyebrow: "",
       title: "像朋友一樣，自然而然",
       items: [
         {
@@ -206,7 +202,7 @@ export const i18n = {
       ],
     },
     entries: {
-      eyebrow: "三大入口",
+      eyebrow: "",
       title: "聊天、瀏覽、歷史",
       lead: "三個入口，構成你在這個世界裡的日常。",
       disclaimer: "介面為設計示意，並非實際產品截圖。",
@@ -228,19 +224,9 @@ export const i18n = {
         },
       ],
     },
-    details: {
-      eyebrow: "細節",
-      title: "合手的，才是貼心的",
-      items: [
-        {
-          title: "淺色 · 深色 · 跟隨系統",
-          description: "三種外觀模式，隨環境與心情自然切換。",
-        },
-        {
-          title: "三語支援",
-          description: "簡體中文、繁體中文、English，用你最舒服的語言相處。",
-        },
-      ],
+    subscribe: {
+      eyebrow: "",
+      title: "訂閱",
     },
     closing: {
       title: "正在精心打磨中",
@@ -290,9 +276,9 @@ export const i18n = {
   en: {
     nav: [
       { label: "World", href: "#world" },
-      { label: "Companionship", href: "#companionship" },
       { label: "Entries", href: "#entries" },
-      { label: "Details", href: "#details" },
+      { label: "Companionship", href: "#companionship" },
+      { label: "Subscribe", href: "#subscribe" },
     ],
     brandName: "For You",
     hero: {
@@ -307,7 +293,10 @@ export const i18n = {
     world: {
       eyebrow: "",
       title: "A world that exists for you",
-      lead: "Here, you don't have to worry that a post will go without replies or likes. Whether it's something hard to say out loud, a wild idea, or just a bit of bored rambling — you'll get a response here, and no human will ever see it.",
+      lead: [
+        "Here, you don't have to worry that a post will go without replies or likes.",
+        "Whether it's something hard to say out loud, a wild idea, or just a bit of bored rambling — you'll get a response here, and no human will ever see it.",
+      ],
       cards: [
         {
           title: "The Only Protagonist",
@@ -324,7 +313,7 @@ export const i18n = {
       ],
     },
     companionship: {
-      eyebrow: "Companionship",
+      eyebrow: "",
       title: "As natural as friendship",
       items: [
         {
@@ -346,7 +335,7 @@ export const i18n = {
       ],
     },
     entries: {
-      eyebrow: "Three Entries",
+      eyebrow: "",
       title: "Chat, Feed, History",
       lead: "Three entries make up your everyday life in this world.",
       disclaimer: "Interfaces shown are design mockups, not actual product screenshots.",
@@ -368,19 +357,9 @@ export const i18n = {
         },
       ],
     },
-    details: {
-      eyebrow: "Details",
-      title: "Considerate, down to the small things",
-      items: [
-        {
-          title: "Light · Dark · System",
-          description: "Three appearance modes that follow your environment and your mood.",
-        },
-        {
-          title: "Three Languages",
-          description: "简体中文, 繁體中文, and English — in whichever language feels most like home.",
-        },
-      ],
+    subscribe: {
+      eyebrow: "",
+      title: "Subscribe",
     },
     closing: {
       title: "Being carefully crafted",

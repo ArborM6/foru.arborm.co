@@ -206,10 +206,14 @@ export function EntriesSection() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="max-w-2xl mx-auto text-center"
         >
-          <p className="text-xs font-semibold tracking-[0.3em] text-rose">
-            {t.entries.eyebrow}
-          </p>
-          <h2 className="mt-4 text-3xl md:text-4xl font-bold tracking-tight">
+          {t.entries.eyebrow ? (
+            <p className="text-xs font-semibold tracking-[0.3em] text-rose">
+              {t.entries.eyebrow}
+            </p>
+          ) : null}
+          <h2
+            className={`${t.entries.eyebrow ? "mt-4 " : ""}text-3xl md:text-4xl font-bold tracking-tight`}
+          >
             {t.entries.title}
           </h2>
           <p className="mt-5 text-base md:text-lg text-foreground-muted">
