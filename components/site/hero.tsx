@@ -2,23 +2,9 @@
 
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { ArrowDown, Sparkles } from "lucide-react"
+import { ArrowDown } from "lucide-react"
 import { useLanguage } from "./language-provider"
-
-function HeartOutline({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.4"
-      className={className}
-      aria-hidden
-    >
-      <path d="M12 20.5C7 16.5 3 13.2 3 9.3 3 6.4 5.2 4.5 7.7 4.5c1.7 0 3.3.9 4.3 2.4 1-1.5 2.6-2.4 4.3-2.4 2.5 0 4.7 1.9 4.7 4.8 0 3.9-4 7.2-9 11.2Z" />
-    </svg>
-  )
-}
+import { PixelCalendarField } from "./pixel-calendar-field"
 
 export function Hero() {
   const { t } = useLanguage()
@@ -26,62 +12,37 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden pt-36 pb-24 md:pt-44 md:pb-32"
+      className="relative overflow-hidden pt-24 pb-20 sm:pt-28 md:pt-32 md:pb-28"
     >
-      {/* Ambient rose glows */}
+      {/* Subtle, even rose gradient ground */}
       <div
-        aria-hidden
-        className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full opacity-25 blur-3xl"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(closest-side, #f78ca6, rgba(247,140,166,0))",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute top-64 -left-40 h-[380px] w-[380px] rounded-full opacity-15 blur-3xl"
-        style={{
-          background:
-            "radial-gradient(closest-side, #e0708f, rgba(224,112,143,0))",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute top-80 -right-40 h-[420px] w-[420px] rounded-full opacity-15 blur-3xl"
-        style={{
-          background:
-            "radial-gradient(closest-side, #fbc9d6, rgba(251,201,214,0))",
+            "linear-gradient(180deg, rgba(247, 140, 166, 0.1) 0%, rgba(224, 112, 143, 0.055) 40%, rgba(224, 112, 143, 0.015) 75%, rgba(21, 14, 18, 0) 100%)",
         }}
       />
 
-      {/* Floating heart outlines */}
-      <HeartOutline className="animate-float-soft absolute left-[12%] top-[22%] hidden h-8 w-8 text-rose/25 md:block" />
-      <HeartOutline className="animate-float-soft-slower absolute right-[14%] top-[30%] hidden h-12 w-12 text-rose/20 md:block" />
-      <HeartOutline className="animate-float-soft absolute right-[22%] bottom-[14%] hidden h-6 w-6 text-rose-soft/25 md:block" />
+      {/* Deterministic pixel-calendar field */}
+      <PixelCalendarField />
 
       <div className="relative max-w-4xl mx-auto px-6 text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          initial={{ opacity: 0, scale: 0.97, y: 18 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="flex justify-center"
+          className="mx-auto w-full max-w-3xl lg:max-w-[820px]"
         >
-          <div className="relative">
-            <div
-              aria-hidden
-              className="absolute inset-0 -m-4 rounded-[36px] opacity-40 blur-2xl"
-              style={{
-                background:
-                  "linear-gradient(135deg, #f78ca6, #e0708f 60%, #fbc9d6)",
-              }}
-            />
+          <div className="overflow-hidden rounded-[28px] sm:rounded-[32px] md:rounded-[36px] ring-1 ring-[rgba(251,201,214,0.22)] shadow-[0_0_52px_-6px_rgba(247,140,166,0.32),0_0_105px_-14px_rgba(224,112,143,0.28),0_26px_72px_-16px_rgba(224,112,143,0.44)]">
             <Image
-              src="/images/icon-512.png"
-              alt="For You app icon"
-              width={112}
-              height={112}
+              src="/images/BANNER.jpg"
+              alt="FOR YOU"
+              width={3171}
+              height={1736}
               priority
-              className="relative w-24 h-24 md:w-28 md:h-28 rounded-[26px] shadow-[0_18px_50px_-10px_rgba(224,112,143,0.55)]"
+              sizes="(max-width: 768px) calc(100vw - 48px), 820px"
+              className="block h-auto w-full select-none"
             />
           </div>
         </motion.div>
@@ -91,22 +52,17 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.12, ease: "easeOut" }}
         >
-          <span className="mt-8 inline-flex items-center gap-2 rounded-full border border-[rgba(247,140,166,0.35)] bg-[rgba(247,140,166,0.08)] px-4 py-1.5 text-xs md:text-sm text-rose-soft">
-            <Sparkles className="h-3.5 w-3.5" />
-            {t.hero.badge}
-          </span>
-
-          <h1 className="mt-6 text-5xl md:text-7xl font-bold tracking-tight">
+          <h1 className="mt-10 md:mt-12 text-5xl md:text-7xl font-bold tracking-tight">
             {t.hero.title}
           </h1>
           <p className="mt-3 text-sm md:text-base font-medium tracking-[0.35em] text-rose">
             {t.hero.subtitle}
           </p>
 
-          <p className="mt-7 text-xl md:text-2xl text-foreground/90 font-medium">
+          <p className="mt-6 md:mt-7 text-xl md:text-2xl text-foreground/90 font-medium">
             {t.hero.tagline}
           </p>
-          <p className="mt-5 max-w-2xl mx-auto text-base md:text-lg leading-relaxed text-foreground-muted">
+          <p className="mt-4 md:mt-5 max-w-2xl mx-auto text-base md:text-lg leading-relaxed text-foreground-muted">
             {t.hero.lead}
           </p>
         </motion.div>
@@ -115,7 +71,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.24, ease: "easeOut" }}
-          className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="mt-9 md:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <button
             type="button"
