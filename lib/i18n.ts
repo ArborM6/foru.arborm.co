@@ -28,8 +28,8 @@ export const i18n = {
       eyebrow: "",
       title: "一个始终为你存在的世界",
       lead: [
-        "在这里，你无需担心发出的帖子没有回复和点赞。",
-        "无论是难以启齿的心结还是天马行空的想法，又或者单纯无聊的碎碎念，都可以在这里得到回应，却不会被任何人类看到。",
+        "在这里，你不再透明，发出的帖子一定有回复和点赞。",
+        "无论是难以启齿的心结还是天马行空的想法，又或者只是单纯无聊的碎碎念，都可以在这里得到回应，却不必担心被任何人类看到。",
       ],
       cards: [
         {
@@ -161,8 +161,8 @@ export const i18n = {
       eyebrow: "",
       title: "一個始終為你存在的世界",
       lead: [
-        "在這裡，你無需擔心發出的帖子沒有回覆和點讚。",
-        "無論是難以啟齒的心結還是天馬行空的想法，又或者單純無聊的碎碎念，都可以在這裡得到回應，卻不會被任何人類看到。",
+        "在這裡，你不再透明，發出的帖子一定有回覆和點讚。",
+        "無論是難以啟齒的心結還是天馬行空的想法，又或者只是單純無聊的碎碎念，都可以在這裡得到回應，卻不必擔心被任何人類看到。",
       ],
       cards: [
         {
@@ -294,8 +294,8 @@ export const i18n = {
       eyebrow: "",
       title: "A world that exists for you",
       lead: [
-        "Here, you don't have to worry that a post will go without replies or likes.",
-        "Whether it's something hard to say out loud, a wild idea, or just a bit of bored rambling — you'll get a response here, and no human will ever see it.",
+        "Here, you are no longer invisible — every post is sure to get replies and likes.",
+        "Whether it's something hard to say out loud, a wild idea, or just a bit of bored rambling — you'll get a response here, without having to worry that any human will see it.",
       ],
       cards: [
         {

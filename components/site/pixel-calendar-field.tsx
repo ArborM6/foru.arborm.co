@@ -1,5 +1,7 @@
 "use client"
 
+import { useEffect, useRef, useState } from "react"
+
 const COLS = 72
 const ROWS = 35 // 5 × 7-day calendar rows
 const CELL = 18
@@ -83,9 +85,10 @@ const ISLANDS: Island[] = [
   { cx: 46, cy: 28, rx: 4.8, ry: 2.9, strength: 0.58 },
 ]
 
-function buildCalendarPaths(): string[] {
+function buildCalendarPaths(): { paths: string[]; lit: { x: number; y: number }[] } {
   const rng = createRng(0x464f5255)
   const paths: string[][] = [[], [], [], [], [], []]
+  const lit: { x: number; y: number }[] = []
 
   // Week-column activity weights per 7-row calendar band (creates vertical calendar streaks)
   const numBands = Math.ceil(ROWS / 7)
@@ -148,13 +151,17 @@ function buildCalendarPaths(): string[] {
       const x = col * STEP
       const y = row * STEP
       paths[level].push(roundedRectSubpath(x, y, CELL, RADIUS))
+      // Visible cells can twinkle; skip the almost-invisible level-0/1 dust
+      if (level >= 2) lit.push({ x, y })
     }
   }
 
-  return paths.map((chunks) => chunks.join(""))
+  return { paths: paths.map((chunks) => chunks.join("")), lit }
 }
 
-const LEVEL_PATHS = buildCalendarPaths()
+const CALENDAR = buildCalendarPaths()
+const LEVEL_PATHS = CALENDAR.paths
+const TWINKLE_CELLS = CALENDAR.lit
 
 // 6 rose/pink intensity steps tuned for dark plum (#150e12) canvas
 const LEVEL_STYLES = [
@@ -169,6 +176,87 @@ const LEVEL_STYLES = [
   { fill: "rgba(247, 140, 166, 0.6)" },
   { fill: "rgba(251, 182, 202, 0.78)" },
 ]
+
+const TWINKLE_COUNT = 14
+
+function pickCell(cells: { x: number; y: number }[], avoid: Set<string>) {
+  const available = cells.filter((c) => !avoid.has(`${c.x},${c.y}`))
+  const pool = available.length > 0 ? available : cells
+  return pool[Math.floor(Math.random() * pool.length)]
+}
+
+function PixelTwinkles({ cells }: { cells: { x: number; y: number }[] }) {
+  const [spots, setSpots] = useState<{ id: number; x: number; y: number; duration: number; delay: number }[]>([])
+  const active = useRef<Set<string>>(new Set())
+  const reduced = useRef(false)
+
+  useEffect(() => {
+    reduced.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (reduced.current || cells.length === 0) return
+
+    const used = new Set<string>()
+    const next = Array.from({ length: TWINKLE_COUNT }, (_, id) => {
+      const cell = pickCell(cells, used)
+      used.add(`${cell.x},${cell.y}`)
+      return {
+        id,
+        x: cell.x,
+        y: cell.y,
+        duration: 0.85 + Math.random() * 0.7,
+        delay: id * 0.12,
+      }
+    })
+    active.current = used
+    // Stagger the first wave so they don't flash in unison
+    const timer = window.setTimeout(() => setSpots(next), 80)
+    return () => window.clearTimeout(timer)
+  }, [cells])
+
+  function relight(id: number) {
+    if (reduced.current) return
+    setSpots((prev) => {
+      const current = prev.find((s) => s.id === id)
+      if (current) active.current.delete(`${current.x},${current.y}`)
+      const cell = pickCell(cells, active.current)
+      active.current.add(`${cell.x},${cell.y}`)
+      return prev.map((s) =>
+        s.id === id
+          ? { id, x: cell.x, y: cell.y, duration: 0.85 + Math.random() * 0.7, delay: 0.08 + Math.random() * 0.18 }
+          : s
+      )
+    })
+  }
+
+  if (spots.length === 0) return null
+
+  return (
+    <svg
+      width={WIDTH}
+      height={HEIGHT}
+      viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+      fill="none"
+      className="absolute top-0 left-1/2 -translate-x-1/2"
+    >
+      {spots.map((s) => (
+        <rect
+          key={`${s.id}-${s.x}-${s.y}`}
+          className="pixel-twinkle"
+          x={s.x}
+          y={s.y}
+          width={CELL}
+          height={CELL}
+          rx={RADIUS}
+          fill="rgba(251, 201, 214, 0.95)"
+          style={{
+            animationDuration: `${s.duration}s`,
+            animationDelay: `${s.delay}s`,
+          }}
+          onAnimationEnd={() => relight(s.id)}
+        />
+      ))}
+    </svg>
+  )
+}
 
 export function PixelCalendarField() {
   return (
@@ -210,33 +298,7 @@ export function PixelCalendarField() {
             ) : null
           )}
         </svg>
-        <svg
-          width={WIDTH}
-          height={HEIGHT}
-          viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-          fill="none"
-          className="absolute top-0 left-1/2 -translate-x-1/2"
-        >
-          {/* Two squares that slowly wander and pulse — cheap CSS only */}
-          <rect
-            className="pixel-wanderer pixel-wanderer-a"
-            x={11 * STEP}
-            y={9 * STEP}
-            width={CELL}
-            height={CELL}
-            rx={RADIUS}
-            fill="rgba(251, 182, 202, 0.92)"
-          />
-          <rect
-            className="pixel-wanderer pixel-wanderer-b"
-            x={57 * STEP}
-            y={14 * STEP}
-            width={CELL}
-            height={CELL}
-            rx={RADIUS}
-            fill="rgba(247, 140, 166, 0.88)"
-          />
-        </svg>
+        <PixelTwinkles cells={TWINKLE_CELLS} />
       </div>
     </div>
   )
