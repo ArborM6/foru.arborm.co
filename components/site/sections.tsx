@@ -12,6 +12,7 @@ import {
 } from "lucide-react"
 import type { ReactNode } from "react"
 import { useLanguage } from "./language-provider"
+import { FloatingHearts } from "./floating-hearts"
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 28 },
@@ -121,9 +122,10 @@ export function CompanionshipSection() {
   return (
     <section
       id="companionship"
-      className="relative py-24 md:py-32 bg-background-secondary/60"
+      className="relative overflow-hidden py-24 md:py-32 bg-background-secondary/60"
     >
-      <div className="max-w-6xl mx-auto px-6">
+      <FloatingHearts variant="companionship" />
+      <div className="relative max-w-6xl mx-auto px-6">
         <SectionHeading
           eyebrow={t.companionship.eyebrow}
           title={t.companionship.title}
@@ -166,8 +168,9 @@ export function SubscribeSection() {
   const { t } = useLanguage()
 
   return (
-    <section id="subscribe" className="relative py-24 md:py-32">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="subscribe" className="relative overflow-hidden py-24 md:py-32">
+      <FloatingHearts variant="subscribe" />
+      <div className="relative max-w-6xl mx-auto px-6">
         <SectionHeading
           eyebrow={t.subscribe.eyebrow}
           title={t.subscribe.title}

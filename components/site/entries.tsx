@@ -12,6 +12,7 @@ import {
 } from "lucide-react"
 import type { ReactNode } from "react"
 import { useLanguage } from "./language-provider"
+import { FloatingHearts } from "./floating-hearts"
 
 function PhoneFrame({ children }: { children: ReactNode }) {
   return (
@@ -198,6 +199,7 @@ export function EntriesSection() {
             "radial-gradient(closest-side, #f78ca6, rgba(247,140,166,0))",
         }}
       />
+      <FloatingHearts variant="entries" />
       <div className="relative max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 28 }}

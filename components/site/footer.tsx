@@ -3,13 +3,15 @@
 import Image from "next/image"
 import { Mail } from "lucide-react"
 import { useLanguage } from "./language-provider"
+import { FloatingHearts } from "./floating-hearts"
 
 export function Footer() {
   const { t } = useLanguage()
 
   return (
-    <footer className="border-t border-border bg-background-secondary/70">
-      <div className="max-w-6xl mx-auto px-6 py-14">
+    <footer className="relative overflow-hidden border-t border-border bg-background-secondary/70">
+      <FloatingHearts variant="footer" />
+      <div className="relative max-w-6xl mx-auto px-6 py-14">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
           <div>
             <Image
