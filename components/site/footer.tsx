@@ -19,9 +19,6 @@ export function Footer() {
               height={34}
               className="h-8 w-auto"
             />
-            <p className="mt-4 text-sm text-foreground-muted">
-              {t.footer.tagline}
-            </p>
           </div>
 
           <div className="text-sm leading-loose text-foreground-muted">

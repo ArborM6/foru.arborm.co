@@ -28,9 +28,6 @@ export function ClosingSection() {
           <h2 className="mt-12 text-3xl md:text-4xl font-bold tracking-tight">
             {t.closing.title}
           </h2>
-          <p className="mt-4 text-lg md:text-xl text-rose-soft font-medium">
-            {t.closing.tagline}
-          </p>
           <p className="mt-6 text-sm tracking-[0.2em] text-foreground-muted">
             {t.closing.sub}
           </p>

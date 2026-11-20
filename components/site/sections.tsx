@@ -43,10 +43,14 @@ function SectionHeading({
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="max-w-2xl mx-auto text-center"
     >
-      <p className="text-xs font-semibold tracking-[0.3em] text-rose">
-        {eyebrow}
-      </p>
-      <h2 className="mt-4 text-3xl md:text-4xl font-bold tracking-tight text-balance">
+      {eyebrow ? (
+        <p className="text-xs font-semibold tracking-[0.3em] text-rose">
+          {eyebrow}
+        </p>
+      ) : null}
+      <h2
+        className={`${eyebrow ? "mt-4 " : ""}text-3xl md:text-4xl font-bold tracking-tight text-balance`}
+      >
         {title}
       </h2>
       {lead ? (

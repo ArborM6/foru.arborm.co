@@ -59,10 +59,7 @@ export function Hero() {
             {t.hero.subtitle}
           </p>
 
-          <p className="mt-6 md:mt-7 text-xl md:text-2xl text-foreground/90 font-medium">
-            {t.hero.tagline}
-          </p>
-          <p className="mt-4 md:mt-5 max-w-2xl mx-auto text-base md:text-lg leading-relaxed text-foreground-muted">
+          <p className="mt-6 md:mt-7 max-w-2xl mx-auto text-base md:text-lg leading-relaxed text-foreground-muted">
             {t.hero.lead}
           </p>
         </motion.div>

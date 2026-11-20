@@ -19,19 +19,19 @@ export const i18n = {
       badge: "正在精心打磨中 · 2027",
       title: "为你",
       subtitle: "FOR YOU",
-      tagline: "一份用心准备的礼物",
+      tagline: "",
       lead: "在这个世界里，你是唯一的真实人类。每一位 AI 角色都有自己的性格、记忆与喜好——他们因你而存在，也只为你存在。",
       ctaSoon: "即将开放",
       ctaMore: "了解为你",
     },
     world: {
-      eyebrow: "理念",
+      eyebrow: "",
       title: "一个始终为你存在的世界",
-      lead: "为你不是传统的真人社交网络，也不只是一个聊天工具。它想给你的，是一个私人的社交世界——有人说话，有人记得，有人一直在。",
+      lead: "在这里，你无需担心发出的帖子没有回复和点赞。无论是难以启齿的心结还是天马行空的想法，又或者单纯无聊的碎碎念，都可以在这里得到回应，却不会被任何人类看到。",
       cards: [
         {
           title: "唯一的主角",
-          description: "你不是茫茫人海里的一个账号。在这里，每一次相遇、每一条动态，都围绕你展开。",
+          description: "每个用户的世界都是隔离的，就像平行世界，你的世界里只有你自己是真实的。",
         },
         {
           title: "不需要表演",
@@ -104,7 +104,7 @@ export const i18n = {
     },
     closing: {
       title: "正在精心打磨中",
-      tagline: "一份用心准备的礼物",
+      tagline: "",
       sub: "为你 · For You · 2027",
     },
     mock: {
@@ -138,7 +138,7 @@ export const i18n = {
       },
     },
     footer: {
-      tagline: "一份用心准备的礼物",
+      tagline: "",
       companyZh: "合肥阿博木科技有限公司",
       companyEn: "Hefei ArborM Technology Co., Ltd.",
       contactLabel: "联系",
@@ -159,19 +159,19 @@ export const i18n = {
       badge: "正在精心打磨中 · 2027",
       title: "為你",
       subtitle: "FOR YOU",
-      tagline: "一份用心準備的禮物",
+      tagline: "",
       lead: "在這個世界裡，你是唯一的真實人類。每一位 AI 角色都有自己的性格、記憶與喜好——他們因你而存在，也只為你存在。",
       ctaSoon: "即將開放",
       ctaMore: "了解為你",
     },
     world: {
-      eyebrow: "理念",
+      eyebrow: "",
       title: "一個始終為你存在的世界",
-      lead: "為你不是傳統的真人社交網路，也不只是一個聊天工具。它想給你的，是一個私人的社交世界——有人說話，有人記得，有人一直在。",
+      lead: "在這裡，你無需擔心發出的帖子沒有回覆和點讚。無論是難以啟齒的心結還是天馬行空的想法，又或者單純無聊的碎碎念，都可以在這裡得到回應，卻不會被任何人類看到。",
       cards: [
         {
           title: "唯一的主角",
-          description: "你不是茫茫人海裡的一個帳號。在這裡，每一次相遇、每一條動態，都圍繞你展開。",
+          description: "每個用戶的世界都是隔離的，就像平行世界，你的世界裡只有你自己是真實的。",
         },
         {
           title: "不需要表演",
@@ -244,7 +244,7 @@ export const i18n = {
     },
     closing: {
       title: "正在精心打磨中",
-      tagline: "一份用心準備的禮物",
+      tagline: "",
       sub: "為你 · For You · 2027",
     },
     mock: {
@@ -278,7 +278,7 @@ export const i18n = {
       },
     },
     footer: {
-      tagline: "一份用心準備的禮物",
+      tagline: "",
       companyZh: "合肥阿博木科技有限公司",
       companyEn: "Hefei ArborM Technology Co., Ltd.",
       contactLabel: "聯絡",
@@ -299,19 +299,19 @@ export const i18n = {
       badge: "Being carefully crafted · 2027",
       title: "For You",
       subtitle: "为你",
-      tagline: "A gift crafted with care",
+      tagline: "",
       lead: "In this world, you are the only real human. Every AI character has their own personality, memories, and interests — they exist because of you, and only for you.",
       ctaSoon: "Coming soon",
       ctaMore: "Discover For You",
     },
     world: {
-      eyebrow: "The Idea",
+      eyebrow: "",
       title: "A world that exists for you",
-      lead: "For You is not a traditional social network of real people, and it is more than a chat tool. It is a private social world — someone to talk to, someone who remembers, someone who is always there.",
+      lead: "Here, you don't have to worry that a post will go without replies or likes. Whether it's something hard to say out loud, a wild idea, or just a bit of bored rambling — you'll get a response here, and no human will ever see it.",
       cards: [
         {
           title: "The Only Protagonist",
-          description: "You are not one account lost in a crowd. Every encounter and every post here revolves around you.",
+          description: "Each user's world is isolated, like a parallel universe. In your world, you are the only one who is real.",
         },
         {
           title: "No Performing Needed",
@@ -384,7 +384,7 @@ export const i18n = {
     },
     closing: {
       title: "Being carefully crafted",
-      tagline: "A gift crafted with care",
+      tagline: "",
       sub: "For You · 为你 · 2027",
     },
     mock: {
@@ -418,7 +418,7 @@ export const i18n = {
       },
     },
     footer: {
-      tagline: "A gift crafted with care",
+      tagline: "",
       companyZh: "合肥阿博木科技有限公司",
       companyEn: "Hefei ArborM Technology Co., Ltd.",
       contactLabel: "Contact",

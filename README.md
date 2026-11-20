@@ -1,8 +1,7 @@
 # foru.arborm.co
 
 Marketing / introduction website for **For You（为你）** — a single-player social app
-centered on AI character companionship. A gift crafted with care; currently being
-carefully crafted (2027).
+centered on AI character companionship. Currently being carefully crafted (2027).
 
 Tri-lingual (简体中文 / 繁體中文 / English) single-page site built with
 Next.js (App Router) · TypeScript · Tailwind CSS v4 · Framer Motion.
