@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { MessagesSquare, Newspaper, User, type LucideIcon } from "lucide-react"
+import type { ReactNode } from "react"
 import { useLanguage } from "./language-provider"
 import { FloatingHearts } from "./floating-hearts"
 
@@ -12,19 +13,29 @@ const SCREENSHOTS = [
   { src: "/images/screenshots/mine.png", width: 1206, height: 2622 },
 ] as const
 
+function PhoneFrame({ children }: { children: ReactNode }) {
+  return (
+    <div className="relative mx-auto w-full max-w-[270px] rounded-[42px] bg-gradient-to-b from-[#43303a] via-[#241a20] to-[#43303a] p-[9px] shadow-[0_32px_64px_-24px_rgba(0,0,0,0.7)]">
+      <div className="relative aspect-[1206/2622] w-full overflow-hidden rounded-[34px] bg-[#181016]">
+        {children}
+      </div>
+    </div>
+  )
+}
+
 function EntryScreenshot({ index, alt }: { index: number; alt: string }) {
   const shot = SCREENSHOTS[index]
   return (
-    <div className="relative mx-auto w-full max-w-[270px] shadow-[0_32px_64px_-24px_rgba(0,0,0,0.55)]">
+    <PhoneFrame>
       <Image
         src={shot.src}
         alt={alt}
         width={shot.width}
         height={shot.height}
         sizes="(max-width: 768px) 270px, 270px"
-        className="block h-auto w-full"
+        className="block h-full w-full"
       />
-    </div>
+    </PhoneFrame>
   )
 }
 
