@@ -31,8 +31,8 @@ const PLACEMENTS = {
     "animate-float-soft-slower absolute left-[28%] bottom-[22%] hidden h-7 w-7 text-rose/15 md:block",
   ],
   footer: [
-    "animate-float-soft absolute left-[10%] top-[18%] hidden h-7 w-7 text-rose/20 md:block",
-    "animate-float-soft-slower absolute right-[12%] top-[28%] hidden h-9 w-9 text-rose/15 md:block",
+    "animate-float-soft absolute left-[10%] top-[18%] hidden h-6 w-6 text-rose/12 md:block",
+    "animate-float-soft-slower absolute right-[12%] top-[28%] hidden h-7 w-7 text-rose/10 md:block",
   ],
 } as const
 
