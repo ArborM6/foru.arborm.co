@@ -1,5 +1,10 @@
 export type Lang = "zh" | "hant" | "en"
 
+export function parseLang(value: string | null | undefined): Lang | null {
+  if (value === "zh" || value === "hant" || value === "en") return value
+  return null
+}
+
 export const languages: { code: Lang; label: string; htmlLang: string }[] = [
   { code: "zh", label: "简", htmlLang: "zh-CN" },
   { code: "hant", label: "繁", htmlLang: "zh-Hant" },
@@ -136,6 +141,10 @@ export const i18n = {
       companyEn: "Hefei ArborM Technology Co., Ltd.",
       contactLabel: "联系",
       websiteLabel: "公司网站",
+      legalLabel: "条款",
+      terms: "用户协议",
+      privacy: "隐私政策",
+      backToHome: "返回首页",
       copyrightZh: "© 2026 合肥阿博木科技有限公司 版权所有",
       copyrightEn: "© 2026 Hefei ArborM Technology Co., Ltd. All rights reserved.",
     },
@@ -269,6 +278,10 @@ export const i18n = {
       companyEn: "Hefei ArborM Technology Co., Ltd.",
       contactLabel: "聯絡",
       websiteLabel: "公司網站",
+      legalLabel: "條款",
+      terms: "使用者協議",
+      privacy: "隱私政策",
+      backToHome: "返回首頁",
       copyrightZh: "© 2026 合肥阿博木科技有限公司 版權所有",
       copyrightEn: "© 2026 Hefei ArborM Technology Co., Ltd. All rights reserved.",
     },
@@ -402,6 +415,10 @@ export const i18n = {
       companyEn: "Hefei ArborM Technology Co., Ltd.",
       contactLabel: "Contact",
       websiteLabel: "Company site",
+      legalLabel: "Legal",
+      terms: "Terms of Use",
+      privacy: "Privacy Policy",
+      backToHome: "Back to Home",
       copyrightZh: "© 2026 合肥阿博木科技有限公司 版权所有",
       copyrightEn: "© 2026 Hefei ArborM Technology Co., Ltd. All rights reserved.",
     },

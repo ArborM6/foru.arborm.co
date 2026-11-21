@@ -7,7 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react"
-import { i18n, languages, type Content, type Lang } from "@/lib/i18n"
+import { i18n, languages, parseLang, type Content, type Lang } from "@/lib/i18n"
 
 const STORAGE_KEY = "foryou-lang"
 
@@ -23,12 +23,33 @@ const LanguageContext = createContext<LanguageContextValue>({
   t: i18n.zh,
 })
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("zh")
+export function LanguageProvider({
+  children,
+  initialLang,
+}: {
+  children: ReactNode
+  initialLang?: Lang
+}) {
+  const [lang, setLangState] = useState<Lang>(initialLang ?? "zh")
 
   useEffect(() => {
-    const saved = window.localStorage.getItem(STORAGE_KEY)
-    if (saved === "zh" || saved === "hant" || saved === "en") {
+    if (initialLang) {
+      setLangState(initialLang)
+      window.localStorage.setItem(STORAGE_KEY, initialLang)
+    }
+  }, [initialLang])
+
+  useEffect(() => {
+    const queryLang = parseLang(
+      new URLSearchParams(window.location.search).get("lang")
+    )
+    if (queryLang) {
+      setLangState(queryLang)
+      window.localStorage.setItem(STORAGE_KEY, queryLang)
+      return
+    }
+    const saved = parseLang(window.localStorage.getItem(STORAGE_KEY))
+    if (saved) {
       setLangState(saved)
     }
   }, [])
@@ -42,6 +63,13 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const setLang = (next: Lang) => {
     setLangState(next)
     window.localStorage.setItem(STORAGE_KEY, next)
+    const url = new URL(window.location.href)
+    url.searchParams.set("lang", next)
+    window.history.replaceState(
+      null,
+      "",
+      `${url.pathname}${url.search}${url.hash}`
+    )
   }
 
   return (

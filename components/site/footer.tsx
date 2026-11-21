@@ -1,18 +1,19 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { Mail } from "lucide-react"
 import { useLanguage } from "./language-provider"
 import { FloatingHearts } from "./floating-hearts"
 
 export function Footer() {
-  const { t } = useLanguage()
+  const { lang, t } = useLanguage()
 
   return (
     <footer className="relative overflow-hidden border-t border-border bg-background-secondary/70">
       <FloatingHearts variant="footer" />
       <div className="relative max-w-6xl mx-auto px-6 py-14">
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
           <div>
             <Image
               src="/images/foryou-wordmark.png"
@@ -47,6 +48,30 @@ export function Footer() {
                 www.arborm.co
               </a>
             </p>
+          </div>
+
+          <div>
+            <h4 className="mb-3 text-xs font-medium tracking-[0.18em] uppercase text-foreground/45">
+              {t.footer.legalLabel}
+            </h4>
+            <ul className="flex flex-col gap-2.5 text-sm text-foreground-muted">
+              <li>
+                <Link
+                  href={`/terms?lang=${lang}`}
+                  className="hover:text-rose transition-colors"
+                >
+                  {t.footer.terms}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`/privacy?lang=${lang}`}
+                  className="hover:text-rose transition-colors"
+                >
+                  {t.footer.privacy}
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
 
