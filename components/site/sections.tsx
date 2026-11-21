@@ -71,8 +71,9 @@ export function WorldSection() {
   const icons: LucideIcon[] = [Crown, Sparkles, Sprout]
 
   return (
-    <section id="world" className="relative py-24 md:py-32">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="world" className="relative overflow-hidden py-24 md:py-32">
+      <FloatingHearts variant="world" />
+      <div className="relative max-w-6xl mx-auto px-6">
         <SectionHeading
           eyebrow={t.world.eyebrow}
           title={t.world.title}

@@ -14,6 +14,11 @@ function HeartOutline({ className }: { className?: string }) {
 }
 
 const PLACEMENTS = {
+  world: [
+    "animate-float-soft-slower absolute left-[7%] top-[16%] hidden h-9 w-9 text-rose/22 md:block",
+    "animate-float-soft absolute right-[8%] top-[24%] hidden h-7 w-7 text-rose/20 md:block",
+    "animate-float-soft absolute right-[20%] bottom-[12%] hidden h-6 w-6 text-rose-soft/22 md:block",
+  ],
   entries: [
     "animate-float-soft absolute left-[8%] top-[18%] hidden h-8 w-8 text-rose/25 md:block",
     "animate-float-soft-slower absolute right-[7%] top-[28%] hidden h-12 w-12 text-rose/20 md:block",
