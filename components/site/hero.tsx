@@ -34,17 +34,15 @@ export function Hero() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mx-auto w-full max-w-3xl lg:max-w-[820px]"
         >
-          <div className="overflow-hidden rounded-[28px] sm:rounded-[32px] md:rounded-[36px] ring-1 ring-[rgba(251,201,214,0.22)] shadow-[0_0_52px_-6px_rgba(247,140,166,0.32),0_0_105px_-14px_rgba(224,112,143,0.28),0_26px_72px_-16px_rgba(224,112,143,0.44)]">
-            <Image
-              src="/images/BANNER.jpg"
-              alt="FOR YOU"
-              width={3171}
-              height={1736}
-              priority
-              sizes="(max-width: 768px) calc(100vw - 48px), 820px"
-              className="block h-auto w-full select-none"
-            />
-          </div>
+          <Image
+            src="/images/BANNER-logo.png"
+            alt="FOR YOU"
+            width={3171}
+            height={1736}
+            priority
+            sizes="(max-width: 768px) calc(100vw - 48px), 820px"
+            className="block h-auto w-full select-none [filter:drop-shadow(0_0_2px_rgba(251,201,214,0.35))_drop-shadow(0_0_12px_rgba(247,140,166,0.32))]"
+          />
         </motion.div>
 
         <motion.div
