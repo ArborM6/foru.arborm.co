@@ -4,6 +4,7 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { ArrowDown } from "lucide-react"
 import { useLanguage } from "./language-provider"
+import { PixelCalendarField } from "./pixel-calendar-field"
 
 export function Hero() {
   const { t } = useLanguage()
@@ -20,17 +21,20 @@ export function Hero() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mx-auto w-full max-w-3xl lg:max-w-[820px]"
         >
-          {/* Percentage radius tracks the PNG's ~20px (of 996×528) transparent corners at every width */}
-          <div className="overflow-hidden rounded-[2.4%/4.5%] shadow-[0_18px_48px_-24px_rgba(0,0,0,0.7)]">
-            <Image
-              src="/images/BANNER-pixel.png"
-              alt="FOR YOU"
-              width={996}
-              height={528}
-              priority
-              sizes="(max-width: 768px) calc(100vw - 48px), 820px"
-              className="block h-auto w-full select-none"
-            />
+          {/* Banner card: dense pixel-calendar field behind the official wordmark (cut out of BANNER.jpg) */}
+          <div className="relative aspect-[3171/1736] overflow-hidden rounded-[20px] sm:rounded-[24px] md:rounded-[28px] bg-[#1c1218] shadow-[0_18px_48px_-24px_rgba(0,0,0,0.7)]">
+            <PixelCalendarField />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Image
+                src="/images/BANNER-logo.png"
+                alt="FOR YOU"
+                width={2916}
+                height={582}
+                priority
+                sizes="(max-width: 768px) calc((100vw - 48px) * 0.64), 525px"
+                className="block h-auto w-[64%] select-none [filter:drop-shadow(0_0_2px_rgba(21,14,18,0.55))_drop-shadow(0_0_16px_rgba(247,140,166,0.45))]"
+              />
+            </div>
           </div>
         </motion.div>
 

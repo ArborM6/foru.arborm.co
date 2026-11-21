@@ -2,22 +2,16 @@
 
 import { useEffect, useRef, useState } from "react"
 
-const COLS = 72
-const ROWS = 35 // 5 × 7-day calendar rows
+// Sized to cover the hero banner card (max 820px wide) at native cell scale;
+// the card crops this grid from its center, so narrower cards stay dense.
+const COLS = 37
+const ROWS = 21 // 3 × 7-day calendar rows
 const CELL = 18
 const GAP = 5
 const STEP = CELL + GAP
 const RADIUS = 4.5
 const WIDTH = COLS * STEP - GAP
 const HEIGHT = ROWS * STEP - GAP
-
-interface Island {
-  cx: number
-  cy: number
-  rx: number
-  ry: number
-  strength: number
-}
 
 // Deterministic Mulberry32 PRNG (seed: "FORU")
 function createRng(seed: number) {
@@ -58,33 +52,6 @@ function roundedRectSubpath(x: number, y: number, size: number, r: number): stri
   return `M${x + r} ${y}h${straight}a${r} ${r} 0 0 1 ${r} ${r}v${straight}a${r} ${r} 0 0 1 -${r} ${r}h-${straight}a${r} ${r} 0 0 1 -${r} -${r}v-${straight}a${r} ${r} 0 0 1 ${r} -${r}z`
 }
 
-// Curated-plus-seeded archipelago of calendar clusters framing the hero banner & type
-const ISLANDS: Island[] = [
-  // Left flank clusters
-  { cx: 10, cy: 5, rx: 4.8, ry: 3.4, strength: 1.05 },
-  { cx: 15, cy: 11, rx: 4.2, ry: 4.0, strength: 0.95 },
-  { cx: 9, cy: 17, rx: 4.5, ry: 3.2, strength: 0.9 },
-  { cx: 16, cy: 23, rx: 5.0, ry: 3.6, strength: 0.85 },
-  { cx: 12, cy: 29, rx: 4.2, ry: 2.8, strength: 0.65 },
-  // Upper-center / crown clusters (visible above banner on desktop & mobile)
-  { cx: 25, cy: 3.5, rx: 5.2, ry: 2.8, strength: 0.95 },
-  { cx: 36, cy: 2.5, rx: 5.6, ry: 2.9, strength: 0.9 },
-  { cx: 47, cy: 4.0, rx: 5.0, ry: 2.8, strength: 1.0 },
-  // Right flank clusters
-  { cx: 61, cy: 6, rx: 5.0, ry: 3.6, strength: 1.05 },
-  { cx: 56, cy: 13, rx: 4.4, ry: 4.2, strength: 0.95 },
-  { cx: 63, cy: 19, rx: 4.6, ry: 3.4, strength: 0.9 },
-  { cx: 57, cy: 25, rx: 5.0, ry: 3.5, strength: 0.82 },
-  { cx: 62, cy: 30, rx: 4.0, ry: 2.6, strength: 0.6 },
-  // Center-field & lower-shoulder islands (keeps mobile & center rich without overpowering copy)
-  { cx: 24, cy: 15, rx: 4.2, ry: 3.5, strength: 0.72 },
-  { cx: 48, cy: 16, rx: 4.2, ry: 3.5, strength: 0.75 },
-  { cx: 31, cy: 22, rx: 4.6, ry: 3.2, strength: 0.62 },
-  { cx: 41, cy: 21, rx: 4.4, ry: 3.2, strength: 0.62 },
-  { cx: 26, cy: 28, rx: 4.8, ry: 2.9, strength: 0.58 },
-  { cx: 46, cy: 28, rx: 4.8, ry: 2.9, strength: 0.58 },
-]
-
 function buildCalendarPaths(): { paths: string[]; lit: { x: number; y: number }[] } {
   const rng = createRng(0x464f5255)
   const paths: string[][] = [[], [], [], [], [], []]
@@ -103,30 +70,14 @@ function buildCalendarPaths(): { paths: string[]; lit: { x: number; y: number }[
 
   for (let row = 0; row < ROWS; row++) {
     const band = Math.floor(row / 7)
-    // Gentle taper near bottom rows so clusters finish organically before mask fade
-    const bottomTaper = row > 28 ? Math.max(0.28, 1 - (row - 28) * 0.11) : 1
 
     for (let col = 0; col < COLS; col++) {
-      let islandSum = 0
-      for (let i = 0; i < ISLANDS.length; i++) {
-        const isl = ISLANDS[i]
-        const dx = (col - isl.cx) / isl.rx
-        const dy = (row - isl.cy) / isl.ry
-        const d2 = dx * dx + dy * dy
-        if (d2 < 4.5) {
-          islandSum += isl.strength * Math.exp(-d2 * 1.15)
-        }
-      }
-
       const patchNoise = valueNoise(col * 0.34, row * 0.38, 17)
       const microNoise = valueNoise(col * 0.75, row * 0.75, 53)
       const jitter = rng()
 
-      const score =
-        Math.min(1.25, islandSum) *
-        weekWeights[band][col] *
-        (0.58 + 0.62 * patchNoise) *
-        bottomTaper
+      // Dense field: every week column is active, modulated by organic patches
+      const score = weekWeights[band][col] * (0.5 + 0.7 * patchNoise) * 0.8
 
       let level = 0
 
@@ -235,7 +186,7 @@ function PixelTwinkles({ cells }: { cells: { x: number; y: number }[] }) {
       height={HEIGHT}
       viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
       fill="none"
-      className="absolute top-0 left-1/2 -translate-x-1/2"
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
     >
       {spots.map((s) => (
         <rect
@@ -258,48 +209,30 @@ function PixelTwinkles({ cells }: { cells: { x: number; y: number }[] }) {
   )
 }
 
+// Fills its positioned, overflow-hidden parent (the hero banner card) edge to edge
 export function PixelCalendarField() {
   return (
-    <div
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-0 overflow-hidden select-none"
-      style={{
-        maskImage:
-          "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.28) 6%, rgba(0,0,0,0.95) 16%, rgba(0,0,0,0.88) 56%, rgba(0,0,0,0.32) 82%, rgba(0,0,0,0) 98%)",
-        WebkitMaskImage:
-          "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.28) 6%, rgba(0,0,0,0.95) 16%, rgba(0,0,0,0.88) 56%, rgba(0,0,0,0.32) 82%, rgba(0,0,0,0) 98%)",
-      }}
-    >
-      <div
-        className="absolute inset-0"
-        style={{
-          maskImage:
-            "linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 14%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.85) 86%, rgba(0,0,0,0) 100%)",
-          WebkitMaskImage:
-            "linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 14%, rgba(0,0,0,1) 50%, rgba(0,0,0,0.85) 86%, rgba(0,0,0,0) 100%)",
-        }}
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden select-none">
+      <svg
+        width={WIDTH}
+        height={HEIGHT}
+        viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
+        fill="none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60"
       >
-        <svg
-          width={WIDTH}
-          height={HEIGHT}
-          viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-          fill="none"
-          className="absolute top-0 left-1/2 -translate-x-1/2 opacity-60"
-        >
-          {LEVEL_PATHS.map((d, level) =>
-            d ? (
-              <path
-                key={level}
-                d={d}
-                fill={LEVEL_STYLES[level].fill}
-                stroke={LEVEL_STYLES[level].stroke}
-                strokeWidth={LEVEL_STYLES[level].strokeWidth}
-              />
-            ) : null
-          )}
-        </svg>
-        <PixelTwinkles cells={TWINKLE_CELLS} />
-      </div>
+        {LEVEL_PATHS.map((d, level) =>
+          d ? (
+            <path
+              key={level}
+              d={d}
+              fill={LEVEL_STYLES[level].fill}
+              stroke={LEVEL_STYLES[level].stroke}
+              strokeWidth={LEVEL_STYLES[level].strokeWidth}
+            />
+          ) : null
+        )}
+      </svg>
+      <PixelTwinkles cells={TWINKLE_CELLS} />
     </div>
   )
 }
