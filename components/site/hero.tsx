@@ -50,10 +50,8 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.12, ease: "easeOut" }}
         >
-          <h1 className="mt-10 md:mt-12 text-5xl md:text-7xl font-bold tracking-tight">
-            {t.hero.title}
-          </h1>
-          <p className="mt-3 text-sm md:text-base font-medium tracking-[0.35em] text-rose">
+          <h1 className="sr-only">{t.hero.title}</h1>
+          <p className="mt-10 md:mt-12 text-sm md:text-base font-medium tracking-[0.35em] text-rose">
             {t.hero.subtitle}
           </p>
 
