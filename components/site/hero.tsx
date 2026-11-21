@@ -4,7 +4,6 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { ArrowDown } from "lucide-react"
 import { useLanguage } from "./language-provider"
-import { PixelCalendarField } from "./pixel-calendar-field"
 
 export function Hero() {
   const { t } = useLanguage()
@@ -14,19 +13,6 @@ export function Hero() {
       id="top"
       className="relative overflow-hidden pt-24 pb-20 sm:pt-28 md:pt-32 md:pb-28"
     >
-      {/* Subtle, even rose gradient ground */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(247, 140, 166, 0.1) 0%, rgba(224, 112, 143, 0.055) 40%, rgba(224, 112, 143, 0.015) 75%, rgba(21, 14, 18, 0) 100%)",
-        }}
-      />
-
-      {/* Deterministic pixel-calendar field */}
-      <PixelCalendarField />
-
       <div className="relative max-w-4xl mx-auto px-6 text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.97, y: 18 }}
@@ -34,12 +20,13 @@ export function Hero() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mx-auto w-full max-w-3xl lg:max-w-[820px]"
         >
-          <div className="overflow-hidden rounded-[28px] sm:rounded-[32px] md:rounded-[36px] ring-1 ring-[rgba(251,201,214,0.22)] shadow-[0_0_52px_-6px_rgba(247,140,166,0.32),0_0_105px_-14px_rgba(224,112,143,0.28),0_26px_72px_-16px_rgba(224,112,143,0.44)]">
+          {/* Percentage radius tracks the PNG's ~20px (of 996×528) transparent corners at every width */}
+          <div className="overflow-hidden rounded-[2.4%/4.5%] shadow-[0_18px_48px_-24px_rgba(0,0,0,0.7)]">
             <Image
-              src="/images/BANNER.jpg"
+              src="/images/BANNER-pixel.png"
               alt="FOR YOU"
-              width={3171}
-              height={1736}
+              width={996}
+              height={528}
               priority
               sizes="(max-width: 768px) calc(100vw - 48px), 820px"
               className="block h-auto w-full select-none"
