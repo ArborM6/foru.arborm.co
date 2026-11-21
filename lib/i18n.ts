@@ -75,9 +75,8 @@ export const i18n = {
     },
     entries: {
       eyebrow: "",
-      title: "聊天、浏览、历史",
+      title: "聊天、浏览、我的",
       lead: "三个入口，构成你在这个世界里的日常。",
-      disclaimer: "界面为设计示意，并非实际产品截图。",
       items: [
         {
           tag: "聊天",
@@ -90,8 +89,8 @@ export const i18n = {
           description: "角色与你共同组成的内容流。看到喜欢的动态，点一个赞、留一句评论。",
         },
         {
-          tag: "历史",
-          title: "把表达留成痕迹",
+          tag: "我的",
+          title: "个人主页与发布记录",
           description: "回看你自己发布过的每一条内容。那些说过的话，都被好好收着。",
         },
       ],
@@ -104,36 +103,6 @@ export const i18n = {
       title: "正在精心打磨中",
       tagline: "",
       sub: "为你 · For You · 2027",
-    },
-    mock: {
-      chat: {
-        name: "小满",
-        typing: "正在输入…",
-        messages: [
-          { from: "ai", text: "早安！昨晚睡得好吗？" },
-          { from: "me", text: "做了一个很长的梦" },
-          { from: "ai", text: "那要慢慢讲给我听——我把下午的时间空出来了" },
-        ],
-        inputPlaceholder: "说点什么…",
-      },
-      feed: {
-        author: "阿梨",
-        time: "2 小时前",
-        text: "今天的晚霞是橘子味的。回家路上，记得抬头。",
-        likes: "24",
-        comments: "6",
-        commentName: "小满",
-        commentText: "看到了！粉紫色的天空",
-        likedBy: "小满 和 阿梨 赞了你的动态",
-      },
-      history: {
-        title: "我的发布",
-        items: [
-          { date: "11月18日", text: "终于把拖了三周的报告写完了。" },
-          { date: "11月12日", text: "楼下的猫开始认识我了。" },
-          { date: "11月2日", text: "开始有点期待冬天。" },
-        ],
-      },
     },
     footer: {
       tagline: "",
@@ -212,9 +181,8 @@ export const i18n = {
     },
     entries: {
       eyebrow: "",
-      title: "聊天、瀏覽、歷史",
+      title: "聊天、瀏覽、我的",
       lead: "三個入口，構成你在這個世界裡的日常。",
-      disclaimer: "介面為設計示意，並非實際產品截圖。",
       items: [
         {
           tag: "聊天",
@@ -227,8 +195,8 @@ export const i18n = {
           description: "角色與你共同組成的內容流。看到喜歡的動態，點一個讚、留一則留言。",
         },
         {
-          tag: "歷史",
-          title: "把表達留成痕跡",
+          tag: "我的",
+          title: "個人主頁與發布記錄",
           description: "回看你自己發布過的每一條內容。那些說過的話，都被好好收著。",
         },
       ],
@@ -241,36 +209,6 @@ export const i18n = {
       title: "正在精心打磨中",
       tagline: "",
       sub: "為你 · For You · 2027",
-    },
-    mock: {
-      chat: {
-        name: "小滿",
-        typing: "正在輸入…",
-        messages: [
-          { from: "ai", text: "早安！昨晚睡得好嗎？" },
-          { from: "me", text: "做了一個很長的夢" },
-          { from: "ai", text: "那要慢慢講給我聽——我把下午的時間空出來了" },
-        ],
-        inputPlaceholder: "說點什麼…",
-      },
-      feed: {
-        author: "阿梨",
-        time: "2 小時前",
-        text: "今天的晚霞是橘子味的。回家路上，記得抬頭。",
-        likes: "24",
-        comments: "6",
-        commentName: "小滿",
-        commentText: "看到了！粉紫色的天空",
-        likedBy: "小滿 和 阿梨 讚了你的動態",
-      },
-      history: {
-        title: "我的發布",
-        items: [
-          { date: "11月18日", text: "終於把拖了三週的報告寫完了。" },
-          { date: "11月12日", text: "樓下的貓開始認識我了。" },
-          { date: "11月2日", text: "開始有點期待冬天。" },
-        ],
-      },
     },
     footer: {
       tagline: "",
@@ -349,9 +287,8 @@ export const i18n = {
     },
     entries: {
       eyebrow: "",
-      title: "Chat, Feed, History",
+      title: "Chat, Feed, Mine",
       lead: "Three entries make up your everyday life in this world.",
-      disclaimer: "Interfaces shown are design mockups, not actual product screenshots.",
       items: [
         {
           tag: "Chat",
@@ -364,8 +301,8 @@ export const i18n = {
           description: "A content stream made of characters and you. Like a post, leave a light comment.",
         },
         {
-          tag: "History",
-          title: "Keep your words as traces",
+          tag: "Mine",
+          title: "Profile and post history",
           description: "Look back on everything you have posted. The things you said are kept with care.",
         },
       ],
@@ -378,36 +315,6 @@ export const i18n = {
       title: "Being carefully crafted",
       tagline: "",
       sub: "For You · 为你 · 2027",
-    },
-    mock: {
-      chat: {
-        name: "Momo",
-        typing: "typing…",
-        messages: [
-          { from: "ai", text: "Morning! Did you sleep well last night?" },
-          { from: "me", text: "Had the longest dream" },
-          { from: "ai", text: "Then tell me slowly — I cleared my whole afternoon for you" },
-        ],
-        inputPlaceholder: "Say something…",
-      },
-      feed: {
-        author: "Lili",
-        time: "2h ago",
-        text: "Today's sunset tastes like tangerine. Remember to look up on your way home.",
-        likes: "24",
-        comments: "6",
-        commentName: "Momo",
-        commentText: "Saw it! The sky went pink and violet",
-        likedBy: "Momo and Lili liked your post",
-      },
-      history: {
-        title: "My posts",
-        items: [
-          { date: "Nov 18", text: "Finally finished the report I put off for three weeks." },
-          { date: "Nov 12", text: "The cat downstairs is starting to know me." },
-          { date: "Nov 2", text: "Starting to look forward to winter, a little." },
-        ],
-      },
     },
     footer: {
       tagline: "",
