@@ -41,7 +41,7 @@ export function Hero() {
             height={1736}
             priority
             sizes="(max-width: 768px) calc(100vw - 48px), 820px"
-            className="block h-auto w-full select-none [filter:drop-shadow(0_0_2px_rgba(251,201,214,0.35))_drop-shadow(0_0_12px_rgba(247,140,166,0.32))]"
+            className="block h-auto w-full select-none [filter:drop-shadow(0_0_1px_rgba(255,255,255,0.65))_drop-shadow(0_0_6px_rgba(251,201,214,0.8))_drop-shadow(0_0_16px_rgba(247,140,166,0.62))_drop-shadow(0_0_32px_rgba(247,140,166,0.42))_drop-shadow(0_0_56px_rgba(224,112,143,0.26))]"
           />
         </motion.div>
 

@@ -58,7 +58,9 @@ function roundedRectSubpath(x: number, y: number, size: number, r: number): stri
   return `M${x + r} ${y}h${straight}a${r} ${r} 0 0 1 ${r} ${r}v${straight}a${r} ${r} 0 0 1 -${r} ${r}h-${straight}a${r} ${r} 0 0 1 -${r} -${r}v-${straight}a${r} ${r} 0 0 1 ${r} -${r}z`
 }
 
-// Curated-plus-seeded archipelago of calendar clusters framing the hero banner & type
+// Curated-plus-seeded archipelago of calendar clusters. Former opaque-banner
+// hole (upper-center, behind the now-transparent wordmark) is filled so the
+// field stays even with the flanks; islands keep calendar-like gaps.
 const ISLANDS: Island[] = [
   // Left flank clusters
   { cx: 10, cy: 5, rx: 4.8, ry: 3.4, strength: 1.05 },
@@ -66,7 +68,7 @@ const ISLANDS: Island[] = [
   { cx: 9, cy: 17, rx: 4.5, ry: 3.2, strength: 0.9 },
   { cx: 16, cy: 23, rx: 5.0, ry: 3.6, strength: 0.85 },
   { cx: 12, cy: 29, rx: 4.2, ry: 2.8, strength: 0.65 },
-  // Upper-center / crown clusters (visible above banner on desktop & mobile)
+  // Upper-center / crown clusters
   { cx: 25, cy: 3.5, rx: 5.2, ry: 2.8, strength: 0.95 },
   { cx: 36, cy: 2.5, rx: 5.6, ry: 2.9, strength: 0.9 },
   { cx: 47, cy: 4.0, rx: 5.0, ry: 2.8, strength: 1.0 },
@@ -76,11 +78,22 @@ const ISLANDS: Island[] = [
   { cx: 63, cy: 19, rx: 4.6, ry: 3.4, strength: 0.9 },
   { cx: 57, cy: 25, rx: 5.0, ry: 3.5, strength: 0.82 },
   { cx: 62, cy: 30, rx: 4.0, ry: 2.6, strength: 0.6 },
-  // Center-field & lower-shoulder islands (keeps mobile & center rich without overpowering copy)
+  // Fill the former banner hole — especially the dark band above the wordmark
+  { cx: 29, cy: 8.5, rx: 5.2, ry: 3.2, strength: 0.78 },
+  { cx: 36, cy: 9.5, rx: 5.5, ry: 3.3, strength: 0.82 },
+  { cx: 43, cy: 8.5, rx: 5.2, ry: 3.2, strength: 0.78 },
+  // Behind / through the now-transparent wordmark
+  { cx: 30, cy: 14.0, rx: 4.4, ry: 3.0, strength: 0.68 },
+  { cx: 36, cy: 15.5, rx: 5.4, ry: 3.2, strength: 0.72 },
+  { cx: 42, cy: 14.5, rx: 4.4, ry: 3.0, strength: 0.68 },
+  // Existing off-center shoulders, plus fills below F / U and around「为你」
   { cx: 24, cy: 15, rx: 4.2, ry: 3.5, strength: 0.72 },
   { cx: 48, cy: 16, rx: 4.2, ry: 3.5, strength: 0.75 },
+  { cx: 26, cy: 19.5, rx: 4.2, ry: 2.6, strength: 0.7 },
+  { cx: 46, cy: 19.5, rx: 4.2, ry: 2.6, strength: 0.7 },
   { cx: 31, cy: 22, rx: 4.6, ry: 3.2, strength: 0.62 },
   { cx: 41, cy: 21, rx: 4.4, ry: 3.2, strength: 0.62 },
+  { cx: 36, cy: 25.5, rx: 5.0, ry: 3.0, strength: 0.68 },
   { cx: 26, cy: 28, rx: 4.8, ry: 2.9, strength: 0.58 },
   { cx: 46, cy: 28, rx: 4.8, ry: 2.9, strength: 0.58 },
 ]
@@ -177,11 +190,26 @@ const LEVEL_STYLES = [
   { fill: "rgba(251, 182, 202, 0.78)" },
 ]
 
-const TWINKLE_COUNT = 14
+const TWINKLE_COUNT = 18
 
-function pickCell(cells: { x: number; y: number }[], avoid: Set<string>) {
+// Pixel-space bounds of the former dark band above the wordmark
+const UPPER_HOLE = { x0: 20 * STEP, x1: 51 * STEP, y0: 6 * STEP, y1: 12 * STEP }
+
+function inUpperHole(cell: { x: number; y: number }) {
+  return cell.x >= UPPER_HOLE.x0 && cell.x <= UPPER_HOLE.x1 && cell.y >= UPPER_HOLE.y0 && cell.y <= UPPER_HOLE.y1
+}
+
+function pickCell(
+  cells: { x: number; y: number }[],
+  avoid: Set<string>,
+  preferUpper = false,
+) {
   const available = cells.filter((c) => !avoid.has(`${c.x},${c.y}`))
   const pool = available.length > 0 ? available : cells
+  if (preferUpper) {
+    const upper = pool.filter(inUpperHole)
+    if (upper.length > 0) return upper[Math.floor(Math.random() * upper.length)]
+  }
   return pool[Math.floor(Math.random() * pool.length)]
 }
 
@@ -196,7 +224,7 @@ function PixelTwinkles({ cells }: { cells: { x: number; y: number }[] }) {
 
     const used = new Set<string>()
     const next = Array.from({ length: TWINKLE_COUNT }, (_, id) => {
-      const cell = pickCell(cells, used)
+      const cell = pickCell(cells, used, id < 5)
       used.add(`${cell.x},${cell.y}`)
       return {
         id,
@@ -217,7 +245,7 @@ function PixelTwinkles({ cells }: { cells: { x: number; y: number }[] }) {
     setSpots((prev) => {
       const current = prev.find((s) => s.id === id)
       if (current) active.current.delete(`${current.x},${current.y}`)
-      const cell = pickCell(cells, active.current)
+      const cell = pickCell(cells, active.current, Math.random() < 0.28)
       active.current.add(`${cell.x},${cell.y}`)
       return prev.map((s) =>
         s.id === id
