@@ -14,6 +14,19 @@ export function Hero() {
       id="top"
       className="relative overflow-hidden pt-24 pb-20 sm:pt-28 md:pt-32 md:pb-28"
     >
+      {/* Subtle, even rose gradient ground */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(247, 140, 166, 0.1) 0%, rgba(224, 112, 143, 0.055) 40%, rgba(224, 112, 143, 0.015) 75%, rgba(21, 14, 18, 0) 100%)",
+        }}
+      />
+
+      {/* Deterministic pixel-calendar field */}
+      <PixelCalendarField />
+
       <div className="relative max-w-4xl mx-auto px-6 text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.97, y: 18 }}
@@ -21,20 +34,16 @@ export function Hero() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mx-auto w-full max-w-3xl lg:max-w-[820px]"
         >
-          {/* Banner card: dense pixel-calendar field behind the official wordmark (cut out of BANNER.jpg) */}
-          <div className="relative aspect-[3171/1736] overflow-hidden rounded-[20px] sm:rounded-[24px] md:rounded-[28px] bg-[#1c1218] shadow-[0_18px_48px_-24px_rgba(0,0,0,0.7)]">
-            <PixelCalendarField />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Image
-                src="/images/BANNER-logo.png"
-                alt="FOR YOU"
-                width={2916}
-                height={582}
-                priority
-                sizes="(max-width: 768px) calc((100vw - 48px) * 0.64), 525px"
-                className="block h-auto w-[64%] select-none [filter:drop-shadow(0_0_2px_rgba(21,14,18,0.55))_drop-shadow(0_0_16px_rgba(247,140,166,0.45))]"
-              />
-            </div>
+          <div className="overflow-hidden rounded-[28px] sm:rounded-[32px] md:rounded-[36px] ring-1 ring-[rgba(251,201,214,0.22)] shadow-[0_0_52px_-6px_rgba(247,140,166,0.32),0_0_105px_-14px_rgba(224,112,143,0.28),0_26px_72px_-16px_rgba(224,112,143,0.44)]">
+            <Image
+              src="/images/BANNER.jpg"
+              alt="FOR YOU"
+              width={3171}
+              height={1736}
+              priority
+              sizes="(max-width: 768px) calc(100vw - 48px), 820px"
+              className="block h-auto w-full select-none"
+            />
           </div>
         </motion.div>
 
