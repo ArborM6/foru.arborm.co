@@ -4,14 +4,16 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { MessagesSquare, Newspaper, User, type LucideIcon } from "lucide-react"
 import type { ReactNode } from "react"
+import type { Lang } from "@/lib/i18n"
 import { useLanguage } from "./language-provider"
 import { FloatingHearts } from "./floating-hearts"
 
-const SCREENSHOTS = [
-  { src: "/images/screenshots/chat.png", width: 1206, height: 2622 },
-  { src: "/images/screenshots/feed.png", width: 1206, height: 2622 },
-  { src: "/images/screenshots/mine.png", width: 1206, height: 2622 },
-] as const
+const SCREENSHOT_NAMES = ["chat", "feed", "mine"] as const
+const SCREENSHOT_DIRECTORIES: Record<Lang, string> = {
+  zh: "/images/screenshots",
+  hant: "/images/screenshots/hant",
+  en: "/images/screenshots/en",
+}
 
 function PhoneFrame({ children }: { children: ReactNode }) {
   return (
@@ -23,15 +25,14 @@ function PhoneFrame({ children }: { children: ReactNode }) {
   )
 }
 
-function EntryScreenshot({ index, alt }: { index: number; alt: string }) {
-  const shot = SCREENSHOTS[index]
+function EntryScreenshot({ src, alt }: { src: string; alt: string }) {
   return (
     <PhoneFrame>
       <Image
-        src={shot.src}
+        src={src}
         alt={alt}
-        width={shot.width}
-        height={shot.height}
+        width={1206}
+        height={2622}
         sizes="(max-width: 768px) 270px, 270px"
         className="block h-full w-full"
       />
@@ -40,7 +41,8 @@ function EntryScreenshot({ index, alt }: { index: number; alt: string }) {
 }
 
 export function EntriesSection() {
-  const { t } = useLanguage()
+  const { lang, t } = useLanguage()
+  const screenshotDirectory = SCREENSHOT_DIRECTORIES[lang]
   const icons: LucideIcon[] = [MessagesSquare, Newspaper, User]
 
   return (
@@ -92,7 +94,10 @@ export function EntriesSection() {
                 transition={{ duration: 0.65, delay: i * 0.12, ease: "easeOut" }}
                 className="flex flex-col items-center text-center"
               >
-                <EntryScreenshot index={i} alt={item.tag} />
+                <EntryScreenshot
+                  src={`${screenshotDirectory}/${SCREENSHOT_NAMES[i]}.png`}
+                  alt={item.tag}
+                />
                 <div className="mt-8 flex items-center gap-2.5">
                   <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[rgba(247,140,166,0.12)] text-rose">
                     <Icon className="h-4.5 w-4.5" />
