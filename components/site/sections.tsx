@@ -15,12 +15,10 @@ import { useLanguage } from "./language-provider"
 import { FloatingHearts } from "./floating-hearts"
 
 const fadeInUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0 },
+  visible: { opacity: [0.85, 1], y: [18, 0] },
 }
 
 const stagger = {
-  hidden: {},
   visible: { transition: { staggerChildren: 0.12 } },
 }
 
@@ -38,7 +36,7 @@ function SectionHeading({
   return (
     <motion.div
       variants={fadeInUp}
-      initial="hidden"
+      initial={false}
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -81,7 +79,7 @@ export function WorldSection() {
         />
         <motion.div
           variants={stagger}
-          initial="hidden"
+          initial={false}
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
           className="mt-14 grid gap-6 md:grid-cols-3"
@@ -90,7 +88,7 @@ export function WorldSection() {
             const Icon = icons[i]
             return (
               <motion.div
-                key={card.title}
+                key={i}
                 variants={fadeInUp}
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 className="group rounded-2xl border border-border bg-card p-8 transition-colors hover:border-[rgba(247,140,166,0.35)]"
@@ -133,7 +131,7 @@ export function CompanionshipSection() {
         />
         <motion.div
           variants={stagger}
-          initial="hidden"
+          initial={false}
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
           className="mt-14 grid gap-x-10 gap-y-12 md:grid-cols-2"
@@ -142,7 +140,7 @@ export function CompanionshipSection() {
             const Icon = icons[i]
             return (
               <motion.div
-                key={item.title}
+                key={i}
                 variants={fadeInUp}
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 className="flex gap-5"

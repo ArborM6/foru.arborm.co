@@ -2,13 +2,17 @@
 
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { MessagesSquare, Newspaper, User, type LucideIcon } from "lucide-react"
+import { MessagesSquare, Newspaper, User } from "lucide-react"
 import type { ReactNode } from "react"
 import type { Lang } from "@/lib/i18n"
 import { useLanguage } from "./language-provider"
 import { FloatingHearts } from "./floating-hearts"
 
-const SCREENSHOT_NAMES = ["chat", "feed", "mine"] as const
+const ENTRY_DEMOS = [
+  { name: "chat", icon: MessagesSquare },
+  { name: "feed", icon: Newspaper },
+  { name: "mine", icon: User },
+] as const
 const SCREENSHOT_DIRECTORIES: Record<Lang, string> = {
   zh: "/images/screenshots",
   hant: "/images/screenshots/hant",
@@ -43,7 +47,6 @@ function EntryScreenshot({ src, alt }: { src: string; alt: string }) {
 export function EntriesSection() {
   const { lang, t } = useLanguage()
   const screenshotDirectory = SCREENSHOT_DIRECTORIES[lang]
-  const icons: LucideIcon[] = [MessagesSquare, Newspaper, User]
 
   return (
     <section
@@ -61,8 +64,8 @@ export function EntriesSection() {
       <FloatingHearts variant="entries" />
       <div className="relative max-w-6xl mx-auto px-6">
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={false}
+          whileInView={{ opacity: [0.85, 1], y: [18, 0] }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="max-w-2xl mx-auto text-center"
@@ -83,19 +86,19 @@ export function EntriesSection() {
         </motion.div>
 
         <div className="mt-16 grid gap-14 md:grid-cols-3 md:gap-8">
-          {t.entries.items.map((item, i) => {
-            const Icon = icons[i]
+          {ENTRY_DEMOS.map(({ name, icon: Icon }, i) => {
+            const item = t.entries.items[i]
             return (
               <motion.div
-                key={item.tag}
-                initial={{ opacity: 0, y: 36 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                key={name}
+                initial={false}
+                whileInView={{ opacity: [0.85, 1], y: [18, 0] }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.65, delay: i * 0.12, ease: "easeOut" }}
                 className="flex flex-col items-center text-center"
               >
                 <EntryScreenshot
-                  src={`${screenshotDirectory}/${SCREENSHOT_NAMES[i]}.png`}
+                  src={`${screenshotDirectory}/${name}.png`}
                   alt={item.tag}
                 />
                 <div className="mt-8 flex items-center gap-2.5">
